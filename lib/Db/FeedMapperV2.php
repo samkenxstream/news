@@ -188,9 +188,10 @@ class FeedMapperV2 extends NewsMapperV2
         );
 
         $builder = $this->db->getQueryBuilder();
+        $time = new Time();
         $builder->update(ItemMapperV2::TABLE_NAME)
             ->set('unread', $builder->createParameter('unread'))
-            ->set('last_modified', $this->time->getMicroTime())
+            ->set('last_modified', $time->getMicroTime())
             ->andWhere('id IN (:idList)')
             ->andWhere('unread != :unread')
             ->setParameter('unread', false, IQueryBuilder::PARAM_BOOL)
